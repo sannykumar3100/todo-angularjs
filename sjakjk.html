@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="MyApp">
+    <style>
+        table {
+            border-collapse: collapse;
+        }
+
+        td {
+            border: 1px solid black;
+            padding: 10px 15px;
+            /*font-size: 12px;*/
+        }
+
+        th {
+            color: purple;
+            border: 1px solid black;
+            padding: 10px 15px;
+            /*font-size: 12px;*/
+        }
+
+        /* input{
+        width: 113px;
+    } */
+        body {
+            overflow-y: auto;
+        }
+    </style>
+
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+        <title>component configuration</title>
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+        <link
+            rel="stylesheet"
+            href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css"
+        />
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+        <link rel="stylesheet" href="style.css" />
+        <link
+            rel="stylesheet"
+            href="https://www.w3schools.com/w3css/4/w3.css"
+        />
+        <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+        />
+    </head>
+
+    <body ng-controller="myCtrl as vm">
+        <h3 style="background-color: black ; color:white">
+            component configuration
+        </h3>
+        <div>
+            <h2 style="color: purple">Filter Group</h2>
+            <div style="text-align: end">
+                <button
+                    style=" color:white; background-color: green"
+                    ng-click="vm.addRow()"
+                >
+                    Add
+                </button>
+                <button style=" color:white; background-color: green">
+                    Save
+                </button>
+            </div>
+        </div>
+        <div>
+            <table style="width : 100%">
+                <tr>
+                    <th>S.No.</th>
+                    <th style="text-align: center">Header Drilldown Name</th>
+                    <th style="text-align: center">Drilldown Required</th>
+                    <th style="text-align: center">Subheader Required</th>
+                    <th style="text-align: center">Total Required</th>
+                </tr>
+
+                <!-- .slice(1,vm.rowSets.length) -->
+                <tr ng-repeat="row in vm.rowSets">
+                    <td>{{ row.id }}</td>
+                    <td><input type="text" ng-model="row.name" /></td>
+                    <td>
+                        <select name="Drilldown">
+                            <option></option>
+                            <option value="yes">yes</option>
+                            <option value="no">no</option>
+                        </select>
+                    </td>
+                    <td>
+                        <select name="Subheader">
+                            <option></option>
+                            <option value="yes">yes</option>
+                            <option value="no">no</option>
+                        </select>
+                    </td>
+                    <td>
+                        <select name="Total">
+                            <option></option>
+                            <option value="yes">yes</option>
+                            <option value="no">no</option>
+                        </select>
+                        <!-- <div > -->
+                        <button
+                            ng-if="row.id!==1"
+                            ng-click="vm.removeRow($index)"
+                            style="float: right"
+                        >
+                            X
+                        </button>
+                        <!-- </div> -->
+                        <button
+                            ng-click="vm.show1 = !vm.show1"
+                            style="float: right"
+                        >
+                            <i class="fa fa-gear" style="font-size:24px"></i>
+                        </button>
+                    </td>
+                </tr>
+            </table>
+
+            <br />
+            <br />
+            <br />
+            <div ng-show="vm.show1">
+                <h3 style="color: purple">Main Table Asset</h3>
+                <button
+                    style="float: right; color:white; background-color: green"
+                >
+                    Save
+                </button>
+                <table>
+                    <tr>
+                        <th colspan="2" rowspan="2" ng-model="id">S.No.</th>
+                        <th colspan="5" style="text-align: center">
+                            Field Name
+                        </th>
+                        <th colspan="6" style="text-align: center">
+                            Field Name
+                        </th>
+                        <th colspan="4" style="text-align: center">logic</th>
+                        <th colspan="2"></th>
+                    </tr>
+                    <tr>
+                        <th style="text-align: center">header name</th>
+                        <th style="text-align: center">header group</th>
+                        <th style="text-align: center">
+                            sub header name (enter if only applicable)
+                        </th>
+                        <th style="text-align: center">filter Required</th>
+                        <th style="text-align: center">Alignment</th>
+                        <th style="text-align: center">Data type</th>
+                        <th style="text-align: center">Default data format</th>
+                        <th style="text-align: center">prefix</th>
+                        <th style="text-align: center">suffix</th>
+                        <th style="text-align: center">override date format</th>
+                        <th style="text-align: center">
+                            override configuration
+                        </th>
+                        <th style="text-align: center">select source</th>
+                        <th style="text-align: center">select table</th>
+                        <th style="text-align: center">select Field</th>
+                        <th style="text-align: center">grouping logic</th>
+                        <th style="text-align: center">
+                            total logic enter if only applicable
+                        </th>
+                        <th style="text-align: center">
+                            subtotal logic enter if only applicable
+                        </th>
+                    </tr>
+                    <!-- <tr>
+                        <td>
+                            <button ng-click="vm.addtorows()">
+                                <span
+                                    style="color: cornflowerblue"
+                                    class="glyphicon glyphicon-plus-sign"
+                                ></span>
+                            </button>
+                        </td>
+                        <td>1</td>
+                        <td><input type="text" /></td>
+                        <td><input type="text" /></td>
+                        <td><input type="text" /></td>
+                        <td>
+                            <select name="filter"
+                                ><option></option
+                                ><option value="yes">yes</option
+                                ><option value="no">no</option></select
+                            >
+                        </td>
+                        <td>
+                            <select name="filter"
+                                ><option></option
+                                ><option value="yes">yes</option
+                                ><option value="no">no</option></select
+                            >
+                        </td>
+                        <td>
+                            <select name="filter"
+                                ><option></option
+                                ><option value="yes">yes</option
+                                ><option value="no">no</option></select
+                            >
+                        </td>
+                        <td><input type="text" /></td>
+                        <td><input type="text" /></td>
+                        <td><input type="text" /></td>
+                        <td><input type="text" /></td>
+                        <td><input type="text" /></td>
+                        <td>
+                            <select name="filter"
+                                ><option></option
+                                ><option value="yes">yes</option
+                                ><option value="no">no</option></select
+                            >
+                        </td>
+                        <td>
+                            <select name="filter"
+                                ><option></option
+                                ><option value="yes">yes</option
+                                ><option value="no">no</option></select
+                            >
+                        </td>
+                        <td>
+                            <select name="filter"
+                                ><option></option
+                                ><option value="yes">yes</option
+                                ><option value="no">no</option></select
+                            >
+                        </td>
+                        <td><input type="text" /></td>
+                        <td><input type="text" /></td>
+                        <td><input type="text" /></td>
+                    </tr> -->
+                    <tr ng-repeat="row in vm.rowsetss">
+                        <td>
+                            <button
+                                ng-if="row.rowid!==1"
+                                ng-click="vm.removefromrows($index)"
+                            >
+                                <span
+                                    style="color:red"
+                                    class="glyphicon glyphicon-minus-sign"
+                                ></span>
+                            </button>
+                            <button
+                                ng-if="row.rowid===1"
+                                ng-click="vm.addtorows()"
+                            >
+                                <span
+                                    style="color: cornflowerblue"
+                                    class="glyphicon glyphicon-plus-sign"
+                                ></span>
+                            </button>
+                        </td>
+                        <!-- <td>{{ row.rowid }}</td> -->
+                        <td><input type="text" /></td>
+                        <td><input type="text" /></td>
+                        <td><input type="text" /></td>
+                        <td>
+                            <select name="filter">
+                                <option></option>
+                                <option value="yes">yes</option>
+                                <option value="no">no</option>
+                            </select>
+                        </td>
+                        <td>
+                            <select name="filter">
+                                <option></option>
+                                <option value="yes">yes</option>
+                                <option value="no">no</option>
+                            </select>
+                        </td>
+                        <td>
+                            <select name="filter">
+                                <option></option>
+                                <option value="yes">yes</option>
+                                <option value="no">no</option>
+                            </select>
+                        </td>
+                        <td><input type="text" /></td>
+                        <td><input type="text" /></td>
+                        <td><input type="text" /></td>
+                        <td><input type="text" /></td>
+                        <td><input type="text" /></td>
+                        <td>
+                            <select name="filter">
+                                <option></option>
+                                <option value="yes">yes</option>
+                                <option value="no">no</option>
+                            </select>
+                        </td>
+                        <td>
+                            <select name="filter">
+                                <option></option>
+                                <option value="yes">yes</option>
+                                <option value="no">no</option>
+                            </select>
+                        </td>
+                        <td>
+                            <select name="filter">
+                                <option></option>
+                                <option value="yes">yes</option>
+                                <option value="no">no</option>
+                            </select>
+                        </td>
+                        <td><input type="text" /></td>
+                        <td><input type="text" /></td>
+                        <td><input type="text" /></td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        <script>
+            var app = angular.module('MyApp', []);
+            app.controller('myCtrl', function($scope) {
+                var vm = this;
+                vm.show1 = false;
+
+                vm.$onInit = init;
+                vm.addRow = addRow;
+                vm.removeRow = removeRow;
+                vm.addtorows = addtorows;
+                vm.removefromrows = removefromrows;
+                function init() {
+                    vm.rowSets = [{ id: 1 }];
+                    vm.rowsetss = [{ rowid: 1 }];
+                }
+
+                function addRow() {
+                    var newlength = vm.rowSets.length + 1;
+                    vm.rowSets.push({ id: newlength });
+                }
+                function removeRow(index) {
+                    vm.rowSets.splice(index, 1);
+                }
+                function addtorows() {
+                    var newL = vm.rowsetss.length + 1;
+                    vm.rowsetss.push({ id: newL });
+                }
+                function removefromrows(index) {
+                    vm.rowsetss.splice(index, 1);
+                }
+            });
+        </script>
+    </body>
+</html>

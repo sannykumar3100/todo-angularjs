@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+        <title>Document</title>
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+        <link
+            rel="stylesheet"
+            href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css"
+        />
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+        <link rel="stylesheet" href="style.css" />
+    </head>
+    <body>
+        <div ng-app="MyApp" ng-controller="myCtrl">
+            <table id="theTable">
+                <tr>
+                    <th>id</th>
+                    <th>name</th>
+                </tr>
+                <tr id="templateRow" style="display:none">
+                    <td>{id}</td>
+                    <td><input /></td>
+                </tr>
+            </table>
+
+            <button onclick="addRow()">Go</button>
+        </div>
+        <script>
+            var app = angular.module('MyApp', []);
+
+            app.controller('myCtrl', function($scope) {
+                var maxID = 0;
+                function getTemplateRow() {
+                    var x = document
+                        .getElementById('templateRow')
+                        .cloneNode(true);
+                    x.id = '';
+                    x.style.display = '';
+                    x.innerHTML = x.innerHTML.replace({ id }, ++maxID);
+                    return x;
+                }
+                function addRow() {
+                    var t = document.getElementById('theTable');
+                    var rows = t.getElementsByTagName('tr');
+                    var r = rows[rows.length - 1];
+                    r.parentNode.insertBefore(getTemplateRow(), r);
+                }
+            });
+        </script>
+    </body>
+</html>

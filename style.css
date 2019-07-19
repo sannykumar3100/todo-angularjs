@@ -1,0 +1,15 @@
+.strikethrough:checked + .strikethis {
+    text-decoration: line-through;
+}
+.danger {
+    background-color: #f44336;
+}
+Red .danger:hover {
+    background: #da190b;
+}
+.centralize {
+    text-align: center;
+}
+.right {
+    text-align: right;
+}

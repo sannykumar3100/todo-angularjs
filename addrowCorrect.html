@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+        <title>component configuration</title>
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+        <link
+            rel="stylesheet"
+            href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css"
+        />
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+        <link rel="stylesheet" href="abcd.css" />
+        <link
+            rel="stylesheet"
+            href="https://www.w3schools.com/w3css/4/w3.css"
+        />
+        <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+        />
+    </head>
+
+    <body>
+        <div ng-app="add-row" ng-controller="myCtrl">
+            <form name="setupNewGrid">
+                <fieldset ng-repeat="column in columns">
+                    <input type="text" name="" ng-model="column.headername" />
+                    <input type="text" name="" ng-model="column.headergroup" />
+                    <input
+                        type="text"
+                        name=""
+                        ng-model="column.subheadername"
+                    />
+
+                    <select>
+                        <option value="">Data Type</option>
+                        <option
+                            ng-repeat="type in dataType"
+                            value="{{ type.datatypes }}"
+                            ng-model="dataType.id"
+                        >
+                            {{ type.datatypes }}</option
+                        >
+                    </select>
+                    <select>
+                        <option value="">Data Type</option>
+                        <option
+                            ng-repeat="type in dataType"
+                            value="{{ type.datatypes }}"
+                            ng-model="dataType.id"
+                        >
+                            {{ type.datatypes }}</option
+                        >
+                    </select>
+                    <select>
+                        <option value="">Data Type</option>
+                        <option
+                            ng-repeat="type in dataType"
+                            value="{{ type.datatypes }}"
+                            ng-model="dataType.id"
+                        >
+                            {{ type.datatypes }}</option
+                        >
+                    </select>
+
+                    <input
+                        type="text"
+                        name=""
+                        ng-model="column.defaultdataFormat"
+                    />
+                    <input type="text" ng-model="column.prefix" name="" />
+                    <input type="text" ng-model="column.suffix" name="" />
+                    <input
+                        type="text"
+                        name=""
+                        ng-model="column.overridedateFormat"
+                    />
+                    <input
+                        type="text"
+                        name=""
+                        ng-model="column.overrideconfiguration"
+                    />
+                    <select>
+                        <option value="">Data Type</option>
+                        <option
+                            ng-repeat="type in dataType"
+                            value="{{ type.datatypes }}"
+                            ng-model="dataType.id"
+                        >
+                            {{ type.datatypes }}</option
+                        >
+                    </select>
+                    <select>
+                        <option value="">Data Type</option>
+                        <option
+                            ng-repeat="type in dataType"
+                            value="{{ type.datatypes }}"
+                            ng-model="dataType.id"
+                        >
+                            {{ type.datatypes }}</option
+                        >
+                    </select>
+                    <select>
+                        <option value="">Data Type</option>
+                        <option
+                            ng-repeat="type in dataType"
+                            value="{{ type.datatypes }}"
+                            ng-model="dataType.id"
+                        >
+                            {{ type.datatypes }}</option
+                        >
+                    </select>
+                    <input
+                        type="text"
+                        name=""
+                        ng-model="column.groupinglogic"
+                    />
+                    <input type="text" name="" ng-model="column.totallogic" />
+                    <input
+                        type="text"
+                        name=""
+                        ng-model="column.subtotallogic"
+                    />
+                    <button class="remove" ng-click="removeColumn($index)">
+                        x
+                    </button>
+                </fieldset>
+                <button class="addfields" ng-click="addNewColumn()">
+                    Add Column
+                </button>
+            </form>
+        </div>
+        <script>
+            var app = angular.module('add-row', []);
+
+            app.controller('myCtrl', function($scope) {
+                $scope.dataType = [
+                    { id: 1, datatypes: 'yes' },
+                    { id: 2, datatypes: 'no' }
+                ];
+
+                $scope.columns = [
+                    {
+                        colid: 'col1',
+                        headername: '',
+                        headergroup: '',
+                        subheadername: '',
+                        datatype1: [],
+                        datatype2: [],
+                        datatype3: [],
+                        defaultdataFormat: '',
+                        prefix: '',
+                        suffix: '',
+                        overridedateFormat: '',
+                        overrideconfiguration: '',
+                        datatype4: [],
+                        datatype5: [],
+                        datatype6: [],
+                        groupinglogic: '',
+                        totallogic: '',
+                        subtotallogic: ''
+                    }
+                ];
+
+                $scope.addNewColumn = function() {
+                    var newItemNo = $scope.columns.length + 1;
+                    $scope.columns.push({ colid: 'col' + newItemNo });
+                };
+                //
+                $scope.removeColumn = function(index) {
+                    $scope.columns.splice(index, 1);
+                    if (
+                        $scope.columns.length() === 0 ||
+                        $scope.columns.length() == null
+                    ) {
+                        alert('no rec');
+                        //$scope.columns.push = [{ colid: 'col1' }];
+                    }
+                };
+            });
+        </script>
+    </body>
+</html>
