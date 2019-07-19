@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+        <title>Document</title>
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+        <link
+            rel="stylesheet"
+            href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css"
+        />
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+        <link rel="stylesheet" href="style.css" />
+        <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css" />
+    </head>
+    
+    <body>
+        <div ng-app="Todos" ng-controller="myCtrl">
+            <div class="jumbotron text-center">
+                <h1>Todos</h1>
+            </div>
+            <form class="todo-form" ng-submit="addItem()">
+                <div class="jumbotron text-center">
+                    <input
+                        class="todo-item"
+                        placeholder="What needs to be done?"
+                        ng-model="todos.task"
+                        autofocus
+                    />
+                </div>
+            </form>
+            <div>
+                <ol class="centralize">
+                    <li
+                        class="centralize"
+                        ng-repeat="todos in products1 | filter : svalue;"
+                    >
+                        <input
+                            class="strikethrough"
+                            type="checkbox"
+                            ng-model="todos.checked"
+                        
+                        ng-change="toggleTodo(todos)"
+                    />
+                        <span class="strikethis">
+                            {{ todos.task }}
+                        </span>
+
+                        <button
+                            
+                            ng-click="removeItem($index)"
+                            class="btn btn-sm btn-danger badge-pill"
+                        >
+                            <i class="fa fa-trash">delete</i>
+                        </button>
+                    </li>
+                </ol>
+            </div>
+            <div class="row-mt-3">
+            <div class="col-md-4 col-sm-12">
+                {{ products2.length }} item(s) left
+            </div>
+            <div class="col-md-8 col-sm-12 text-right">
+            <div class="btn-group">
+                <button class="btn btn-primary btn-sm mr-1" ng-click="all()">All</button>
+                <button class="btn btn-primary btn-sm mr-1" ng-click="active()">Active</button>
+                <button class="btn btn-primary btn-sm mr-1" ng-click="completed()">Completed</button>
+                <button class="btn btn-primary btn-sm mr-1" ng-click="clearcompleted()">
+                    Clear Completed
+                </button>
+            </div>
+            </div>
+            </div>
+            
+
+        <script>
+            var app = angular.module('Todos', []);
+
+            app.controller('myCtrl', function($scope) {
+                // $scope.products = [];
+
+                $scope.products = [];
+                $scope.products1 = [];
+                $scope.products2 = [];
+
+                //var todos = { task: 'abc', checked: false };
+                $scope.addItem = function() {
+                    if (!$scope.todos) {
+                        return;
+                    }
+
+                    $scope.products.push(angular.copy($scope.todos));
+                    $scope.products1 = $scope.products;
+                    $scope.todos.task = '';
+                    $scope.products2 = $scope.products1.filter(
+                        todo => !todo.checked
+                    );
+                };
+
+                // $scope.todos = { task: '', checked: false };
+                $scope.removeItem = function(todos) {
+                    $scope.errorText = '';
+                    $scope.products.splice(todos, 1);
+                    $scope.products2 = $scope.products1.filter(
+                        todo => !todo.checked
+                    );
+                };
+                $scope.toggleTodo = function(todo) {
+                    todo.checked = todo.checked;
+                    $scope.products2 = $scope.products1.filter(
+                        todo => !todo.checked 
+                    );
+                };
+                $scope.all = function() {
+                    svalue = 'all';
+                    $scope.always(svalue);
+                };
+                $scope.active = function() {
+                    svalue = 'active';
+                    $scope.always(svalue);
+                };
+                $scope.completed = function() {
+                    svalue = 'completed';
+                    $scope.always(svalue);
+                };
+                $scope.always = function(str) {
+                    if (str === 'completed') {
+                        $scope.products1 = $scope.products.filter(
+                            todo => todo.checked
+                        );
+                    }
+
+                    if (str === 'active') {
+                        $scope.products1 = $scope.products.filter(
+                            todo => !todo.checked
+                        );
+                    }
+                    if (str === 'all') {
+                        $scope.products1 = $scope.products.filter(
+                            todo => todo.checked || !todo.checked
+                        );
+                    }
+                    $scope.products2 = $scope.products1.filter(
+                        todo => !todo.checked
+                    );
+                };
+                $scope.clearcompleted = function() {
+                    $scope.products = $scope.products.filter(
+                        todo => !todo.checked
+                    );
+                };
+            });
+        </script>
+    </body>
+</html>
